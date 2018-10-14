@@ -14,6 +14,10 @@ describe Control do
         it 'Initializes with a surface' do
             expect(@control.surface).to eq(@surface)
         end
+
+        it 'Initializes with an empty robots array' do
+            expect(@control.robots).to eq([])
+        end
     end
 
 end
