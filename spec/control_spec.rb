@@ -37,4 +37,16 @@ describe Control do
         end
     end
 
+    describe '#instruct_robot' do
+        before(:each) do
+            @robot = double(:robot)
+            allow(@robot).to receive(:move)
+        end
+
+        it 'Instructs the robot to move forward' do
+            expect(@robot).to receive(:move)
+            @control.instruct_robot(@robot, 'F')
+        end
+    end
+
 end

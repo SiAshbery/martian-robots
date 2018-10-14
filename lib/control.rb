@@ -11,5 +11,9 @@ class Control
         @robots << robot
         @surface.position(robot, x_coord, y_coord)
     end
+
+    def instruct_robot(robot, commands)
+        robot.move
+    end
    
 end
