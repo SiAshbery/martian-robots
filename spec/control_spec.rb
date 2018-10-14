@@ -42,6 +42,7 @@ describe Control do
             @robot = double(:robot)
             allow(@robot).to receive(:move)
             allow(@robot).to receive(:turn).with('R')
+            allow(@robot).to receive(:turn).with('L')
         end
 
         it 'Instructs the robot to move forward' do
@@ -54,6 +55,13 @@ describe Control do
             expect(@robot).to receive(:turn)
             expect(@robot).not_to receive(:move)
             @control.instruct_robot(@robot, 'R')
+        end
+
+        it 'Can recieve multiple instructions' do
+            expect(@robot).to receive(:turn).with('R').exactly(2).times
+            expect(@robot).to receive(:turn).with('L').exactly(2).times
+            expect(@robot).to receive(:move).exactly(2).times
+            @control.instruct_robot(@robot, 'RLFRLF')
         end
     end
 

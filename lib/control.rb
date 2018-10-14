@@ -13,10 +13,12 @@ class Control
     end
 
     def instruct_robot(robot, commands)
-        if commands == 'F'
-            robot.move
-        else
-            robot.turn(commands)
+        commands.split('').each do |command|
+            if command == 'F'
+                robot.move
+            else
+                robot.turn(command)
+            end
         end
     end
    
