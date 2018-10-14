@@ -25,6 +25,11 @@ describe Robot do
         it 'Initializes with an orientation' do
             expect(robot.orientation).to eq(@orientation)
         end
+
+        it 'Initializes with an orientation orther than N' do
+            robot = described_class.new(0, 1, 'E')
+            expect(robot.orientation).to eq('E')
+        end
     end
 
     describe '#turn' do
@@ -40,6 +45,12 @@ describe Robot do
 
         it 'faces south if it turns twice' do
             2.times { robot.turn('R') }
+            expect(robot.orientation).to eq('S')
+        end
+
+        it 'Orients itself correct when initialized facing a direction other than N' do
+            robot = described_class.new(0, 1, 'E')
+            robot.turn('R')
             expect(robot.orientation).to eq('S')
         end
     end
