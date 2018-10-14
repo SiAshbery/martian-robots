@@ -10,12 +10,23 @@ class Interface
         @renderer.render_start_menu
         case gets.chomp
         when '1'
-            @renderer.render_main_menu
+            start_new_mission
+            return
         when '2'
             @renderer.render_quit_message
             exit
         else
             @renderer.render_error_message
+            start_menu
+            return
         end
+        return
+    end
+
+private
+
+    def start_new_mission
+        @renderer.render_surface_prompt
+        input = gets.chomp
     end
 end

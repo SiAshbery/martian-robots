@@ -187,6 +187,8 @@ This suggests to me two possibilities:
 
 I would like to ad more descriptive warnings and errors. E.g. When creating a surface with a length larger than the max allowed, it currently caps the length off at the max (50) without informing the user
 
-## Bugs
+## Issues
 
-Testing gets.chomp pauses the tests until user manuall presses enter.
+Testing gets.chomp pauses the tests until user manually presses enter.
+
+Switch statements causes rspec to hang unless they manually `break` Ruby reports invalid `break` statements however
