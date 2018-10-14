@@ -1,8 +1,9 @@
 require 'surface'
 
 describe Surface do
-
-    subject(:surface) { described_class.new(2, 4) }
+    X_COORD = 2
+    Y_COORD = 4
+    subject(:surface) { described_class.new(X_COORD, Y_COORD) }
 
     describe '#initialize' do
         it 'Exists' do
@@ -14,11 +15,11 @@ describe Surface do
         end
 
         it 'Initializes with an x_coord' do
-            expect(surface.x_coord).to eq(2)
+            expect(surface.x_coord).to eq(X_COORD)
         end
 
         it 'Initializes with an y_coord' do
-            expect(surface.y_coord).to eq(4)
+            expect(surface.y_coord).to eq(Y_COORD)
         end
     end
 
@@ -29,6 +30,10 @@ describe Surface do
 
         it 'is a two dimensional array' do
             expect(surface.grid[0]).to be_instance_of(Array)
+        end
+
+        it 'Has its Y length defined during initialize' do
+            expect(surface.grid.length).to eq(Y_COORD)
         end
     end
 

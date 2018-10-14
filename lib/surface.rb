@@ -4,7 +4,7 @@ class Surface
     def initialize(x_coord, y_coord)
         @x_coord = x_coord
         @y_coord = y_coord
-        @grid = [[]]
+        @grid = Array.new(y_coord, [])
     end 
 
 end
