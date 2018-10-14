@@ -2,7 +2,7 @@ require 'surface'
 
 describe Surface do
 
-    subject(:surface) { described_class.new(2) }
+    subject(:surface) { described_class.new(2, 4) }
 
     describe '#initialize' do
         it 'Exists' do
@@ -15,6 +15,10 @@ describe Surface do
 
         it 'Initializes with an x_coord' do
             expect(surface.x_coord).to eq(2)
+        end
+
+        it 'Initializes with an y_coord' do
+            expect(surface.y_coord).to eq(4)
         end
     end
 

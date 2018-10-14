@@ -1,8 +1,9 @@
 class Surface
-    attr_reader :grid, :x_coord
+    attr_reader :grid, :x_coord, :y_coord
 
-    def initialize(x_coord)
+    def initialize(x_coord, y_coord)
         @x_coord = x_coord
+        @y_coord = y_coord
         @grid = [[]]
     end 
 
