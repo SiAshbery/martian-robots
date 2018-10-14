@@ -8,8 +8,11 @@ class Interface
 
     def start_menu
         @renderer.render_start_menu
-        if gets.chomp == '1'
+        case gets.chomp
+        when '1'
             @renderer.render_main_menu
+        when '2'
+            exit
         end
     end
 end
