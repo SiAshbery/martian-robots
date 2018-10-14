@@ -1,4 +1,6 @@
 require_relative 'renderer'
+require_relative 'control'
+require_relative 'surface'
 class Interface
     attr_reader :renderer
 
@@ -6,27 +8,16 @@ class Interface
         @renderer = renderer
     end
 
-    def start_menu
-        @renderer.render_start_menu
-        case gets.chomp
-        when '1'
-            start_new_mission
-            return
-        when '2'
-            @renderer.render_quit_message
-            exit
-        else
-            @renderer.render_error_message
-            start_menu
-            return
-        end
-        return
+    def start_new_mission
+        @renderer.render_surface_prompt
+        input = gets.chomp.split(' ').map(&:to_i)
+        @control = Control.new(Surface.new(input[0], input[1]))
+        launch_robot
     end
 
 private
 
-    def start_new_mission
-        @renderer.render_surface_prompt
-        input = gets.chomp
+    def launch_robot
+        @renderer.render_launch_robot_prompt
     end
 end

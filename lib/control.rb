@@ -1,13 +1,12 @@
 require_relative 'scent'
 class Control
-    attr_reader :surface, :robots, :scents, :renderer
+    attr_reader :surface, :robots, :scents
     MAX_COMMAND_LENGTH = 100
 
-    def initialize(surface, renderer)
+    def initialize(surface)
         @surface = surface
         @robots = []
         @scents = []
-        @renderer = renderer
     end
 
     def launch_robot(robot, x_coord, y_coord)

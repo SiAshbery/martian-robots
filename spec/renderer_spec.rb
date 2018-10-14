@@ -33,5 +33,6 @@ describe Renderer do
             expect { renderer.render_quit_message }.
               to output("Bye!\n").to_stdout
         end
+            
     end
 end

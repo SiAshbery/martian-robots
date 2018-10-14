@@ -191,4 +191,6 @@ I would like to ad more descriptive warnings and errors. E.g. When creating a su
 
 Testing gets.chomp pauses the tests until user manually presses enter.
 
-Switch statements causes rspec to hang unless they manually `break` Ruby reports invalid `break` statements however
+Switch statements causes rspec to hang unless they manually `break` Ruby reports invalid `break` statements however.
+
+- This issues have lead to me intergrationg testing the interface manually with start.rb

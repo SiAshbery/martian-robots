@@ -7,7 +7,7 @@ describe Control do
         allow(@surface).to receive(:locate_scent)
         allow(@surface).to receive(:x_coord).and_return(2)
         allow(@surface).to receive(:y_coord).and_return(3)
-        @control = described_class.new(@surface, @renderer)
+        @control = described_class.new(@surface)
     end
 
     describe '#initialize' do
