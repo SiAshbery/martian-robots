@@ -7,7 +7,6 @@ describe Control do
         allow(@surface).to receive(:locate_scent)
         allow(@surface).to receive(:x_coord).and_return(2)
         allow(@surface).to receive(:y_coord).and_return(3)
-        @renderer = double(:renderer)
         @control = described_class.new(@surface, @renderer)
     end
 
@@ -26,10 +25,6 @@ describe Control do
 
         it 'Initializes with an empty scents array' do
             expect(@control.scents).to eq([])
-        end
-
-        it 'Initializes with a renderer' do
-            expect(@control.renderer).to eq(@renderer)
         end
     end
 

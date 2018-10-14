@@ -1,4 +1,3 @@
-require_relative 'surface'
 require_relative 'scent'
 class Control
     attr_reader :surface, :robots, :scents, :renderer
