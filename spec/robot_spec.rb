@@ -54,4 +54,11 @@ describe Robot do
             expect(robot.orientation).to eq('S')
         end
     end
+
+    describe '#move' do
+        it 'When orientated north moves y +1' do
+            robot.move
+            expect(robot.y_coord).to eq(2)
+        end
+    end
 end

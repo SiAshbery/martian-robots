@@ -19,11 +19,15 @@ class Robot
         end
     end
 
+    def move
+        @y_coord += 1
+    end
+
 private
 
     def calibrate_compass(orientation)
         @compass = case orientation
-                   when 'N'
+                    when 'N'
                         %w[N E S W]
                     when 'E'
                         %w[E S W N]
