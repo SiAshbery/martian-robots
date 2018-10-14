@@ -4,6 +4,8 @@ describe Control do
     before(:each) do
         @surface = double(:surface)
         allow(@surface).to receive(:position)
+        allow(@surface).to receive(:x_coord).and_return(2)
+        allow(@surface).to receive(:y_coord).and_return(3)
         @control = described_class.new(@surface)
     end
 
@@ -42,8 +44,8 @@ describe Control do
             @robot = double(:robot)
             allow(@robot).to receive(:move)
             allow(@robot).to receive(:turn)
-            allow(@robot).to receive(:x_coord)
-            allow(@robot).to receive(:y_coord)
+            allow(@robot).to receive(:x_coord).and_return(1)
+            allow(@robot).to receive(:y_coord).and_return(0)
         end
 
         it 'Instructs the robot to move forward' do
@@ -73,6 +75,13 @@ describe Control do
 
         it 'Updates robot position on surface' do
             expect(@surface).to receive(:position).with(@robot, @robot.x_coord, @robot.y_coord)
+            @control.instruct_robot(@robot, 'F')
+        end
+
+        it 'Marks a robot as lost if it goes out of bounds' do
+            allow(@robot).to receive(:x_coord).and_return(4)
+            expect(@robot).to receive(:mark_as_lost)
+            expect(@surface).not_to receive(:position)
             @control.instruct_robot(@robot, 'F')
         end
     end

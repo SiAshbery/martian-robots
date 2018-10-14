@@ -69,11 +69,6 @@ describe Surface do
             expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
             expect(surface.grid[2][0][:occupant]).to eq(@robot)
         end
-
-        it 'Marks a robot as lost if it goes out of bounds' do
-            expect(@robot).to receive(:mark_as_lost)
-            surface.position(@robot, 3, 1)
-        end
     end
 
 end
