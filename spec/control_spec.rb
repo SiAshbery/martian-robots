@@ -21,6 +21,10 @@ describe Control do
         it 'Initializes with an empty robots array' do
             expect(@control.robots).to eq([])
         end
+
+        it 'Initializes with an empty scents array' do
+            expect(@control.scents).to eq([])
+        end
     end
 
     describe '#launch_robot' do

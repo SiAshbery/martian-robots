@@ -1,10 +1,11 @@
 require_relative 'surface'
 class Control
-    attr_reader :surface, :robots
+    attr_reader :surface, :robots, :scents
 
     def initialize(surface)
         @surface = surface
         @robots = []
+        @scents = []
     end
 
     def launch_robot(robot, x_coord, y_coord)
