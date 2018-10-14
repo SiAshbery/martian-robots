@@ -1,4 +1,5 @@
 require_relative 'surface'
+require_relative 'scent'
 class Control
     attr_reader :surface, :robots, :scents
 
@@ -35,6 +36,7 @@ private
             @surface.locate_robot(robot, robot.x_coord, robot.y_coord)
         else
             robot.mark_as_lost
+            @surface.locate_scent(Scent.new(robot.x_coord, robot.y_coord, robot.orientation), robot)
         end
     end
    

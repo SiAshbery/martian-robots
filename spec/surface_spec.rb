@@ -74,10 +74,12 @@ describe Surface do
     describe '#locate_scent' do
         before(:each) do
             @scent = double(:scent)
+            @robot = double(:robot)
+            surface.locate_robot(@robot, 0, 1)
         end
 
         it 'locates a scent at the given location' do
-            surface.locate_scent(@scent, 0, 1)
+            surface.locate_scent(@scent, @robot)
             expect(surface.grid[1][0][:occupant]).to eq(@scent)
         end
     end

@@ -4,6 +4,7 @@ describe Control do
     before(:each) do
         @surface = double(:surface)
         allow(@surface).to receive(:locate_robot)
+        allow(@surface).to receive(:locate_scent)
         allow(@surface).to receive(:x_coord).and_return(2)
         allow(@surface).to receive(:y_coord).and_return(3)
         @control = described_class.new(@surface)
@@ -48,8 +49,10 @@ describe Control do
             @robot = double(:robot)
             allow(@robot).to receive(:move)
             allow(@robot).to receive(:turn)
+            allow(@robot).to receive(:mark_as_lost)
             allow(@robot).to receive(:x_coord).and_return(1)
             allow(@robot).to receive(:y_coord).and_return(0)
+            allow(@robot).to receive(:orientation)
         end
 
         it 'Instructs the robot to move forward' do
@@ -86,6 +89,12 @@ describe Control do
             allow(@robot).to receive(:x_coord).and_return(4)
             expect(@robot).to receive(:mark_as_lost)
             expect(@surface).not_to receive(:locate_robot)
+            @control.instruct_robot(@robot, 'F')
+        end
+
+        it 'Locates a scent on the surface if robot goes out of bounds' do
+            allow(@robot).to receive(:x_coord).and_return(4)
+            expect(@surface).to receive(:locate_scent)
             @control.instruct_robot(@robot, 'F')
         end
     end

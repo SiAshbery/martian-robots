@@ -16,8 +16,8 @@ class Surface
         space_at(x_coord, y_coord)[:occupant] = robot if space_at(x_coord, y_coord)
     end
 
-    def locate_scent(scent, x_coord, y_coord)
-        space_at(x_coord, y_coord)[:occupant] = scent if space_at(x_coord, y_coord)
+    def locate_scent(scent, robot)
+        space_with(robot)[:occupant] = scent if space_with(robot)
     end
 
 private
