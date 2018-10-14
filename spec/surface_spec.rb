@@ -45,4 +45,11 @@ describe Surface do
         end
     end
 
+    describe '#position' do
+        it 'positions object at specified coordiantes' do
+            surface.position('robot', 0, 1)
+            expect(surface.grid[1][0]).to eq('robot')
+        end
+    end
+
 end
