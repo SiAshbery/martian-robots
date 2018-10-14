@@ -6,5 +6,9 @@ class Control
         @surface = surface
         @robots = []
     end
+
+    def launch_robot(robot)
+        @robots << robot
+    end
    
 end

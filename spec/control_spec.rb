@@ -20,4 +20,12 @@ describe Control do
         end
     end
 
+    describe '#launch_robot' do
+        it 'Adds robot to robots' do
+            robot = double(:robot)
+            @control.launch_robot(robot)
+            expect(@control.robots).to include(robot)
+        end
+    end
+
 end
