@@ -41,11 +41,19 @@ describe Control do
         before(:each) do
             @robot = double(:robot)
             allow(@robot).to receive(:move)
+            allow(@robot).to receive(:turn).with('R')
         end
 
         it 'Instructs the robot to move forward' do
             expect(@robot).to receive(:move)
+            expect(@robot).not_to receive(:turn)
             @control.instruct_robot(@robot, 'F')
+        end
+
+        it 'Instructs the robot to turn' do
+            expect(@robot).to receive(:turn)
+            expect(@robot).not_to receive(:move)
+            @control.instruct_robot(@robot, 'R')
         end
     end
 

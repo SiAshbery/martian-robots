@@ -13,7 +13,11 @@ class Control
     end
 
     def instruct_robot(robot, commands)
-        robot.move
+        if commands == 'F'
+            robot.move
+        else
+            robot.turn(commands)
+        end
     end
    
 end
