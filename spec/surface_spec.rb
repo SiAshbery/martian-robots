@@ -2,7 +2,7 @@ require 'surface'
 
 describe Surface do
 
-    subject(:surface) { described_class.new }
+    subject(:surface) { described_class.new(2) }
 
     describe '#initialize' do
         it 'Exists' do
@@ -11,6 +11,10 @@ describe Surface do
 
         it 'Has a grid' do
             expect(surface.grid).to be
+        end
+
+        it 'Initializes with an x_coord' do
+            expect(surface.x_coord).to eq(2)
         end
     end
 
