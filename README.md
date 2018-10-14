@@ -174,3 +174,13 @@ With my Domain roughly modeled I can start looking at producing the actual code.
 The development of this program will be test driven, starting with the smallest discreet units and expanding from there.
 
 Before I start this process however there is one outstanding issue. Based on my research and experience around modelling coordiantes and grids in a program I will likely need to use a 2D array or Matrix. This is not something I am hugely experienced with so my first port of call is to just spend a few minutes in IRB spiking a single grid to improve my understanding of how this might work in practice.
+
+## Things To Do
+
+All the relevant positions of active entities are stored in their respective robots and scents. The surface doesn't seem to have any responsibility for providing coordinates for entities locating on it.
+
+This suggests to me two possibilities:
+
+- I don't need to update the surface constantly, I only need to populate it when it is being rendered to the user.
+
+- My distribution of responsibilities is off and I could move that responsibility into the surface.

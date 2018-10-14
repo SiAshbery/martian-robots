@@ -1,3 +1,4 @@
+require_relative 'space'
 class Surface
     attr_reader :grid, :x_coord, :y_coord
 
@@ -8,22 +9,22 @@ class Surface
         # creates an instance of the same array at each index. Meaning any
         # updates to one sub array affects them all. Wrapping sub array in a block
         # fixes this.
-        @grid = Array.new(y_coord) { Array.new(x_coord) { { occupant: nil } } }
+        @grid = Array.new(y_coord) { Array.new(x_coord) { Space.new } }
     end
 
     def locate_robot(robot, x_coord, y_coord)
-        space_with(robot)[:occupant] = nil if space_with(robot)
-        space_at(x_coord, y_coord)[:occupant] = robot if space_at(x_coord, y_coord)
+        space_with(robot).robot = nil if space_with(robot)
+        space_at(x_coord, y_coord).robot = robot if space_at(x_coord, y_coord)
     end
 
     def locate_scent(scent, robot)
-        space_with(robot)[:occupant] = scent if space_with(robot)
+        space_with(robot).add_scent(scent) if space_with(robot)
     end
 
 private
 
     def space_with(robot)
-        @grid.flatten.find { |space| space[:occupant] == robot }
+        @grid.flatten.find { |space| space.robot == robot }
     end
 
     def space_at(x_coord, y_coord)

@@ -55,19 +55,19 @@ describe Surface do
         end
         it 'positions object at specified coordiantes' do
             surface.locate_robot(@robot, 0, 1)
-            expect(surface.grid[1][0][:occupant]).to eq(@robot)
+            expect(surface.grid[1][0].robot).to eq(@robot)
         end
 
         it 'only positions object at specified coordiantes' do
             surface.locate_robot(@robot, 0, 1)
-            expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
+            expect(surface.grid.flatten.count{ |space| space.robot == @robot }).to eq(1)
         end
 
         it 'Removes reference of robot from its old position' do
             surface.locate_robot(@robot, 0, 1)
             surface.locate_robot(@robot, 0, 2)
-            expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
-            expect(surface.grid[2][0][:occupant]).to eq(@robot)
+            expect(surface.grid.flatten.count{ |space| space.robot == @robot }).to eq(1)
+            expect(surface.grid[2][0].robot).to eq(@robot)
         end
     end
 
@@ -80,7 +80,15 @@ describe Surface do
 
         it 'locates a scent at the given location' do
             surface.locate_scent(@scent, @robot)
-            expect(surface.grid[1][0][:occupant]).to eq(@scent)
+            expect(surface.grid[1][0].scents).to include(@scent)
+        end
+
+        it 'can have two scents on a space' do
+            second_scent = double(:scent)
+            surface.locate_scent(@scent, @robot)
+            surface.locate_scent(second_scent, @robot)
+            expect(surface.grid[1][0].scents).to include(@scent)
+            expect(surface.grid[1][0].scents).to include(second_scent)
         end
     end
 
