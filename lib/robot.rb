@@ -8,7 +8,11 @@ class Robot
     end
 
     def turn(direction)
-        @orientation = 'E'
+        if direction == 'R'
+            @orientation = 'E'
+        else
+            @orientation = 'W'
+        end
     end
 
 end

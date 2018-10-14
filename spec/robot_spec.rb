@@ -32,5 +32,10 @@ describe Robot do
             robot.turn('R')
             expect(robot.orientation).to eq('E')
         end
+
+        it 'turns to the left' do
+            robot.turn('L')
+            expect(robot.orientation).to eq('W')
+        end
     end
 end
