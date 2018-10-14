@@ -1,6 +1,5 @@
 class Robot
-    attr_reader :x_coord, :y_coord
-    attr_accessor :lost
+    attr_reader :x_coord, :y_coord, :lost
 
     def initialize(x_coord, y_coord, orientation)
         @x_coord = x_coord
@@ -32,6 +31,11 @@ class Robot
         when 'W'
             @x_coord -= 1
         end
+    end
+
+    def mark_as_lost
+        # Use method rather than attr_accessor because we only want to set lost as true
+        @lost = true
     end
 
 private

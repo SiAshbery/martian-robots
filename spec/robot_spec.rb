@@ -87,4 +87,11 @@ describe Robot do
             expect(robot.y_coord).to eq(1)
         end
     end
+
+    describe '#lost' do
+        it 'Can be lost' do
+            robot.mark_as_lost
+            expect(robot.lost).to be true
+        end
+    end
 end
