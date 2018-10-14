@@ -36,6 +36,7 @@ describe Interface do
 
         it 'Quits if user select option 2' do
             $stdin = StringIO.new("2\n")
+            expect(@renderer).to receive(:quit_message)
             expect { @interface.start_menu }.to raise_error(SystemExit)
         end
     end

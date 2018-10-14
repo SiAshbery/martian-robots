@@ -12,6 +12,7 @@ class Interface
         when '1'
             @renderer.render_main_menu
         when '2'
+            @renderer.quit_message
             exit
         end
     end
