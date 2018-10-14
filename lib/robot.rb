@@ -24,8 +24,10 @@ class Robot
             @y_coord += 1
         elsif orientation == 'E'
             @x_coord += 1
-        else
+        elsif orientation == 'S'
             @y_coord -= 1
+        else
+            @x_coord -= 1
         end
     end
 
