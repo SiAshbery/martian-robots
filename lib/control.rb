@@ -18,18 +18,26 @@ class Control
     def instruct_robot(robot, commands)
         unless commands.length > MAX_COMMAND_LENGTH
             commands.split('').each do |command|
-                if command == 'F' && safe_to_move?(robot)
-                    scent = Scent.new(robot.x_coord, robot.y_coord, robot.orientation)
-                    robot.move
-                    update_surface(robot, scent)
-                elsif command == 'L' || command == 'R'
-                    robot.turn(command)
-                end
+                process_command(command, robot)
             end
         end
     end
 
 private
+
+    def process_command(command, robot)
+        if command == 'F' && safe_to_move?(robot)
+            handle_movement(robot)
+        elsif command == 'L' || command == 'R'
+            robot.turn(command)
+        end
+    end
+
+    def handle_movement(robot)
+        scent = Scent.new(robot.x_coord, robot.y_coord, robot.orientation)
+        robot.move
+        update_surface(robot, scent)
+    end
 
     def safe_to_move?(robot)
         @scents.find do |scent|
