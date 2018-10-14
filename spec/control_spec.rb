@@ -52,7 +52,7 @@ describe Control do
             allow(@robot).to receive(:mark_as_lost)
             allow(@robot).to receive(:x_coord).and_return(1)
             allow(@robot).to receive(:y_coord).and_return(0)
-            allow(@robot).to receive(:orientation)
+            allow(@robot).to receive(:orientation).and_return('N')
         end
 
         it 'Instructs the robot to move forward' do
@@ -108,10 +108,20 @@ describe Control do
             end
             
             it 'Will not issue move command if scent suggest danger' do
-                expect(@robot).to receive(:mark_as_lost)
+                expect(@robot).to receive(:move)
                 @control.instruct_robot(@robot, 'F')
-                expect(@robot).not_to receive(:mark_as_lost)
+                expect(@robot).not_to receive(:move)
                 @control.instruct_robot(@robot, 'F')
+            end
+
+            it 'Will issue move command if scent suggest danger' do
+                second_robot = double(:robot)
+                allow(second_robot).to receive(:x_coord).and_return(1)
+                allow(second_robot).to receive(:y_coord).and_return(0)
+                allow(second_robot).to receive(:orientation).and_return('E')
+                @control.instruct_robot(@robot, 'F')
+                expect(second_robot).to receive(:move)
+                @control.instruct_robot(second_robot, 'F')
             end
         end
 
