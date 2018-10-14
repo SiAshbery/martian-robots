@@ -7,9 +7,9 @@ class Control
         @robots = []
     end
 
-    def launch_robot(robot)
+    def launch_robot(robot, x_coord, y_coord)
         @robots << robot
-        @surface.position
+        @surface.position(robot, x_coord, y_coord)
     end
    
 end

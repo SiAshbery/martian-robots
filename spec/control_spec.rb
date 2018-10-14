@@ -27,13 +27,13 @@ describe Control do
         end
 
         it 'Adds robot to robots' do
-            @control.launch_robot(@robot)
+            @control.launch_robot(@robot, 0, 0)
             expect(@control.robots).to include(@robot)
         end
 
         it 'Calls position on surface' do
-            expect(@surface).to receive(:position)
-            @control.launch_robot(@robot)
+            expect(@surface).to receive(:position).with(@robot, 0, 0)
+            @control.launch_robot(@robot, 0, 0)
         end
     end
 
