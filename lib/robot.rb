@@ -20,7 +20,11 @@ class Robot
     end
 
     def move
-        @y_coord += 1
+        if orientation == 'N'
+            @y_coord += 1
+        else
+            @x_coord += 1
+        end
     end
 
 private
