@@ -8,11 +8,18 @@ class Surface
         # creates an instance of the same array at each index. Meaning any
         # updates to one sub array affects them all. Wrapping sub array in a block
         # fixes this.
-        @grid = Array.new(y_coord) { Array.new(x_coord, nil) }
+        @grid = Array.new(y_coord) { Array.new(x_coord) { {occupant: nil} } }
     end
 
     def position(robot, x_coord, y_coord)
-        @grid[y_coord][x_coord] = robot
+        space_with(robot)[:occupant] = nil if space_with(robot)
+        @grid[y_coord][x_coord][:occupant] = robot
+    end
+
+private
+
+    def space_with(robot)
+        @grid.flatten.find { |space| space[:occupant] == robot }
     end
 
 end

@@ -1,4 +1,4 @@
-require 'surface'
+require_relative 'surface'
 class Control
     attr_reader :surface, :robots
 

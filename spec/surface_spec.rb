@@ -49,14 +49,24 @@ describe Surface do
     end
 
     describe '#position' do
+        before(:each) do
+            @robot = double(:robot)
+        end
         it 'positions object at specified coordiantes' do
-            surface.position('robot', 0, 1)
-            expect(surface.grid[1][0]).to eq('robot')
+            surface.position(@robot, 0, 1)
+            expect(surface.grid[1][0][:occupant]).to eq(@robot)
         end
 
         it 'only positions object at specified coordiantes' do
-            surface.position('robot', 0, 1)
-            expect(surface.grid.flatten.count('robot')).to eq(1)
+            surface.position(@robot, 0, 1)
+            expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
+        end
+
+        it 'Removes reference of robot from its old position' do
+            surface.position(@robot, 0, 1)
+            surface.position(@robot, 0, 2)
+            expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
+            expect(surface.grid[2][0][:occupant]).to eq(@robot)
         end
     end
 
