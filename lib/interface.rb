@@ -12,8 +12,10 @@ class Interface
         when '1'
             @renderer.render_main_menu
         when '2'
-            @renderer.quit_message
+            @renderer.render_quit_message
             exit
+        else
+            @renderer.render_error_message
         end
     end
 end
