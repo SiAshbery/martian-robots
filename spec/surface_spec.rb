@@ -14,4 +14,14 @@ describe Surface do
         end
     end
 
+    describe '#grid' do
+        it 'is an array' do
+            expect(surface.grid).to be_instance_of(Array)
+        end
+
+        it 'is a two dimensional array' do
+            expect(surface.grid[0]).to be_instance_of(Array)
+        end
+    end
+
 end
