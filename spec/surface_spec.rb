@@ -29,7 +29,9 @@ describe Surface do
         end
 
         it 'is a two dimensional array' do
-            expect(surface.grid[0]).to be_instance_of(Array)
+            surface.grid.each do |row|
+                expect(row).to be_instance_of(Array)
+            end
         end
 
         it 'Has its Y length defined during initialize' do
@@ -37,7 +39,9 @@ describe Surface do
         end
 
         it 'Has its X length defined during initialize' do
-            expect(surface.grid[0].length).to eq(X_COORD)
+            surface.grid.each do |row|
+                expect(row.length).to eq(X_COORD)
+            end
         end
     end
 
