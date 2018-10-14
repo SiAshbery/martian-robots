@@ -41,8 +41,9 @@ describe Control do
         before(:each) do
             @robot = double(:robot)
             allow(@robot).to receive(:move)
-            allow(@robot).to receive(:turn).with('R')
-            allow(@robot).to receive(:turn).with('L')
+            allow(@robot).to receive(:turn)
+            allow(@robot).to receive(:x_coord)
+            allow(@robot).to receive(:y_coord)
         end
 
         it 'Instructs the robot to move forward' do
@@ -68,6 +69,11 @@ describe Control do
             expect(@robot).not_to receive(:turn)
             expect(@robot).not_to receive(:move)
             @control.instruct_robot(@robot, 'beepboop')
+        end
+
+        it 'Updates robot position on surface' do
+            expect(@surface).to receive(:position).with(@robot, @robot.x_coord, @robot.y_coord)
+            @control.instruct_robot(@robot, 'F')
         end
     end
 

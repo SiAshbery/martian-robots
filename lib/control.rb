@@ -16,6 +16,7 @@ class Control
         commands.split('').each do |command|
             if command == 'F'
                 robot.move
+                @surface.position(robot, robot.x_coord, robot.y_coord)
             elsif command == 'L' || command == 'R'
                 robot.turn(command)
             end
