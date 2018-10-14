@@ -4,8 +4,8 @@ class Surface
     MAX_LENGTH = 50
 
     def initialize(x_coord, y_coord)
-        @x_coord = x_coord > MAX_LENGTH ? MAX_LENGTH : x_coord
-        @y_coord = y_coord > MAX_LENGTH ? MAX_LENGTH : y_coord
+        @x_coord = capped_length(x_coord)
+        @y_coord = capped_length(y_coord)
         # Populating a 2D array with Array.new(y_coord, Array.new(x_coord, nil))
         # creates an instance of the same array at each index. Meaning any
         # updates to one sub array affects them all. Wrapping sub array in a block
@@ -23,6 +23,10 @@ class Surface
     end
 
 private
+
+    def capped_length(length)
+        length > MAX_LENGTH ? MAX_LENGTH : length
+    end
 
     def space_with(robot)
         @grid.flatten.find { |space| space.robot == robot }

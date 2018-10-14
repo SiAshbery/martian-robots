@@ -184,3 +184,5 @@ This suggests to me two possibilities:
 - I don't need to update the surface constantly, I only need to populate it when it is being rendered to the user.
 
 - My distribution of responsibilities is off and I could move that responsibility into the surface.
+
+I would like to ad more descriptive warnings and errors. E.g. When creating a surface with a length larger than the max allowed, it currently caps the length off at the max (50) without informing the user

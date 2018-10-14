@@ -2,6 +2,7 @@ require_relative 'surface'
 require_relative 'scent'
 class Control
     attr_reader :surface, :robots, :scents
+    MAX_COMMAND_LENGTH = 100
 
     def initialize(surface)
         @surface = surface
@@ -15,13 +16,15 @@ class Control
     end
 
     def instruct_robot(robot, commands)
-        commands.split('').each do |command|
-            if command == 'F' && safe_to_move?(robot)
-                scent = Scent.new(robot.x_coord, robot.y_coord, robot.orientation)
-                robot.move
-                update_surface(robot, scent)
-            elsif command == 'L' || command == 'R'
-                robot.turn(command)
+        unless commands.length > MAX_COMMAND_LENGTH
+            commands.split('').each do |command|
+                if command == 'F' && safe_to_move?(robot)
+                    scent = Scent.new(robot.x_coord, robot.y_coord, robot.orientation)
+                    robot.move
+                    update_surface(robot, scent)
+                elsif command == 'L' || command == 'R'
+                    robot.turn(command)
+                end
             end
         end
     end

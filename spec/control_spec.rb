@@ -61,6 +61,16 @@ describe Control do
             @control.instruct_robot(@robot, 'F')
         end
 
+        it 'Wont process more than 100 commands at a time' do
+            command_string = ''
+            34.times { command_string += 'F' }
+            34.times { command_string += 'R' }
+            34.times { command_string += 'L' }
+            expect(@robot).not_to receive(:move)
+            expect(@robot).not_to receive(:turn)
+            @control.instruct_robot(@robot, command_string)
+        end
+
         it 'Instructs the robot to turn' do
             expect(@robot).to receive(:turn)
             expect(@robot).not_to receive(:move)
