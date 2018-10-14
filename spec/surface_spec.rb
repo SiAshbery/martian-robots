@@ -50,6 +50,11 @@ describe Surface do
             surface.position('robot', 0, 1)
             expect(surface.grid[1][0]).to eq('robot')
         end
+
+        it 'only positions object at specified coordiantes' do
+            surface.position('robot', 0, 1)
+            expect(surface.grid.flatten.count('robot')).to eq(1)
+        end
     end
 
 end
