@@ -35,6 +35,10 @@ describe Surface do
         it 'Has its Y length defined during initialize' do
             expect(surface.grid.length).to eq(Y_COORD)
         end
+
+        it 'Has its X length defined during initialize' do
+            expect(surface.grid[0].length).to eq(X_COORD)
+        end
     end
 
 end
