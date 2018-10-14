@@ -37,5 +37,10 @@ describe Robot do
             robot.turn('L')
             expect(robot.orientation).to eq('W')
         end
+
+        it 'faces south if it turns twice' do
+            2.times { robot.turn('R') }
+            expect(robot.orientation).to eq('S')
+        end
     end
 end
