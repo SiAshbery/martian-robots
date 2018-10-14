@@ -29,6 +29,11 @@ describe Surface do
             surface = described_class.new(51, 4)
             expect(surface.x_coord).to eq(50)
         end
+
+        it 'Will cap y_coord at 50' do
+            surface = described_class.new(4, 51)
+            expect(surface.y_coord).to eq(50)
+        end
     end
 
     describe '#grid' do

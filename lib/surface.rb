@@ -5,7 +5,7 @@ class Surface
 
     def initialize(x_coord, y_coord)
         @x_coord = x_coord > MAX_LENGTH ? MAX_LENGTH : x_coord
-        @y_coord = y_coord
+        @y_coord = y_coord > MAX_LENGTH ? MAX_LENGTH : y_coord
         # Populating a 2D array with Array.new(y_coord, Array.new(x_coord, nil))
         # creates an instance of the same array at each index. Meaning any
         # updates to one sub array affects them all. Wrapping sub array in a block
