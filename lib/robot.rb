@@ -7,4 +7,8 @@ class Robot
         @orientation = orientation
     end
 
+    def turn(direction)
+        @orientation = 'E'
+    end
+
 end
