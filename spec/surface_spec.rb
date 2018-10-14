@@ -51,6 +51,7 @@ describe Surface do
     describe '#position' do
         before(:each) do
             @robot = double(:robot)
+            allow(@robot).to receive(:mark_as_lost)
         end
         it 'positions object at specified coordiantes' do
             surface.position(@robot, 0, 1)
@@ -67,6 +68,11 @@ describe Surface do
             surface.position(@robot, 0, 2)
             expect(surface.grid.flatten.count{ |space| space[:occupant] == @robot }).to eq(1)
             expect(surface.grid[2][0][:occupant]).to eq(@robot)
+        end
+
+        it 'Marks a robot as lost if it goes out of bounds' do
+            expect(@robot).to receive(:mark_as_lost)
+            surface.position(@robot, 3, 1)
         end
     end
 

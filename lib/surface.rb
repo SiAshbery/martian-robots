@@ -13,7 +13,11 @@ class Surface
 
     def position(robot, x_coord, y_coord)
         space_with(robot)[:occupant] = nil if space_with(robot)
-        space_at(x_coord, y_coord)[:occupant] = robot
+        if space_at(x_coord, y_coord)
+            space_at(x_coord, y_coord)[:occupant] = robot
+        else
+            robot.mark_as_lost
+        end
     end
 
 private
