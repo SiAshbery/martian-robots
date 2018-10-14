@@ -175,7 +175,7 @@ The development of this program will be test driven, starting with the smallest 
 
 Before I start this process however there is one outstanding issue. Based on my research and experience around modelling coordiantes and grids in a program I will likely need to use a 2D array or Matrix. This is not something I am hugely experienced with so my first port of call is to just spend a few minutes in IRB spiking a single grid to improve my understanding of how this might work in practice.
 
-## Things To Do
+## Notes
 
 All the relevant positions of active entities are stored in their respective robots and scents. The surface doesn't seem to have any responsibility for providing coordinates for entities locating on it.
 
