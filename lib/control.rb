@@ -16,7 +16,7 @@ class Control
         commands.split('').each do |command|
             if command == 'F'
                 robot.move
-            else
+            elsif command == 'L' || command == 'R'
                 robot.turn(command)
             end
         end

@@ -63,6 +63,12 @@ describe Control do
             expect(@robot).to receive(:move).exactly(2).times
             @control.instruct_robot(@robot, 'RLFRLF')
         end
+
+        it 'Will not process invalid instructions' do
+            expect(@robot).not_to receive(:turn)
+            expect(@robot).not_to receive(:move)
+            @control.instruct_robot(@robot, 'beepboop')
+        end
     end
 
 end
