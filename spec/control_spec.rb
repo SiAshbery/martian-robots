@@ -106,6 +106,13 @@ describe Control do
                 @control.instruct_robot(@robot, 'F')
                 expect(@control.scents.length).to eq(1)
             end
+            
+            it 'Will not issue move command if scent suggest danger' do
+                expect(@robot).to receive(:mark_as_lost)
+                @control.instruct_robot(@robot, 'F')
+                expect(@robot).not_to receive(:mark_as_lost)
+                @control.instruct_robot(@robot, 'F')
+            end
         end
 
     end
