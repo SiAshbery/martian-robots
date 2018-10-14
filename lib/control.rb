@@ -9,6 +9,7 @@ class Control
 
     def launch_robot(robot)
         @robots << robot
+        @surface.position
     end
    
 end
