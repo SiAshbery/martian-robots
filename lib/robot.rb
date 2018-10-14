@@ -20,13 +20,14 @@ class Robot
     end
 
     def move
-        if orientation == 'N'
+        case orientation
+        when 'N'
             @y_coord += 1
-        elsif orientation == 'E'
+        when 'E'
             @x_coord += 1
-        elsif orientation == 'S'
+        when 'S'
             @y_coord -= 1
-        else
+        when 'W'
             @x_coord -= 1
         end
     end
