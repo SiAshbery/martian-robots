@@ -111,7 +111,7 @@ Output
 World
 ```
 
-With the keywords extracted the next step is to roughly categorize them. Broadly speaking, splitting the keywords into nouns, verbs and adjectives seems a good way to loosely identify keywords that may be objects, methods and properties respectively.
+With the keywords extracted the next step is to roughly categorize them, splitting the keywords into nouns, verbs and adjectives seems a good way to loosely identify keywords that may be objects, methods and properties respectively.
 
 **Note** Some nouns seem to implicitly suggest an action so some liberties are taken in their interpretation. E.g. Instruction becomes Instruct.
 
@@ -132,16 +132,16 @@ With the keywords extracted the next step is to roughly categorize them. Broadly
 | Maximum Value |                  |            |
 | Output        |                  |            |
 
-Once catergorized I have enough to roughly start sketching out how such a system might work.
+Once catergorized I have enough to sketch out how such a system might look.
 
 The process of plotting how the objects might interact without each other highlights a number of considerations:
 
 - Surface and Mars seem to refer to the same thing and could be embodied in a single term. In this case I choose surface as it is less specific. Handy if I ever want to visit Venus!
-- Grid at first seems to be the same as Surface but I believe it refers to a specific property of a surface property.
+- Grid at first seems to be the same as Surface but I believe it refers to a specific property of a surface.
 - The purpose of this task is to land robots on the Surface so it follows that a Surface can contain Robots, but that they are their own discreet entity.
 - Whilst not explicitly mentioned in the brief, in order to get a robot onto the Surface it must be landed, highlighting a new verb 'Land'. This tallies with the first instruction supplied to a robot as outlined in the brief.
 - Robots can also be instructed to move and turn, These alter its Position and Orientation respectively.
-- The brief mentiones that the instructions for the Robots come from Earth. Since I dicided to refer to Mars as surface it would seem useful to use a more specific term for Earth. After all, I might be commanding the robots on Venus from my Mars base one day!
+- The brief mentiones that the instructions for the Robots come from Earth. Since I decided to refer to Mars as surface it would seem useful to use a less specific term for Earth, in this case I opted for Control. After all, I might be commanding the robots on Venus from my Mars base one day!
 - Control's job seems to be processing input into instructions.
 - Instructions can send a Robot off a Surface's Edge, this Robot will then become Lost.
 - When a Robot is lost it leaves behind a Scent on the surface where it was last seen.
@@ -152,14 +152,14 @@ The process of plotting how the objects might interact without each other highli
 - Limits are imposed in terms of Maximum (coordinate) Value (50) and a Maximum instruction string length (100).
 - The Coordinates all refer to the surface so it seems sensible that the Maximum (coordinate) Value should reside there.
 - Instructions are processed by Control so the Maximum Instruction Length should be there.
-- The last piece if the Output which updates the user as to the current Robot status. It would be tempting to let Control handle this but this seems like an extra responsibility. Instead I believe Controlshould have a renderer which handles the rendering of output.
+- The last piece is the Output which updates the user as to the current Robot statuses. It would be tempting to let Control handle this but this seems like an extra responsibility. Instead I believe Control should have a renderer which handles the rendering of output.
 - For the sake of simplicity I'll render things to to STDOUT for this exercise since the brief explicity states that UI isn't the focus of this exercise.
 
 ![Rough Domain Model](/ReadmeImages/Diagram.jpg)
 
 Going through this pricess helps me move the nouns, verbs and adjectives into potential Objects, Methods and Attributes:
 
-| Nouns    |             Verbs             |                               Adjectives |
+| Objects  |            Methods            |                               Attributes |
 | -------- | :---------------------------: | ---------------------------------------: |
 | Surface  |                               | Grid, Edge, Max Coordinate Value, Robots |
 | Robot    | Move, Turn, Land, Leave Scent |              Orientation, Position, Lost |
@@ -167,7 +167,7 @@ Going through this pricess helps me move the nouns, verbs and adjectives into po
 | Renderer |            Render             |                                          |
 | Scent    |       Prohibit Movement       |                    Orientation, Position |
 
-**Note** Again, these are not a concrete guide, rather a jumping off point.
+**Note** Again, these are not a concrete rules, rather a jumping off point.
 
 With my Domain roughly modeled I can start looking at producing the actual code. This may seem like a long winded way to get to this point but I find that it makes all the actual implementation that much more straight forward.
 
