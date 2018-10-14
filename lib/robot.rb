@@ -1,9 +1,11 @@
 class Robot
     attr_reader :x_coord, :y_coord
+    attr_accessor :lost
 
     def initialize(x_coord, y_coord, orientation)
         @x_coord = x_coord
         @y_coord = y_coord
+        @lost = false
         calibrate_compass(orientation)
     end
 

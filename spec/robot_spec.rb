@@ -30,6 +30,10 @@ describe Robot do
             robot = described_class.new(0, 1, 'E')
             expect(robot.orientation).to eq('E')
         end
+
+        it 'Is not lost when intiailized' do
+            expect(robot.lost).to be false
+        end
     end
 
     describe '#turn' do
