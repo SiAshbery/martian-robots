@@ -1,23 +1,29 @@
 require 'robot'
 
 describe Robot do
+    subject(:robot) { described_class.new(0, 1, 'N') }
+
     before(:each) do
         @x_coord = 0
-        @x_coord = 1
-        @robot = described_class.new(@x_coord, @y_coord)
+        @y_coord = 1
+        @orientation = 'N'
     end
 
     describe '#initialize' do
         it 'Exists' do
-            expect(@robot).to be_instance_of(described_class)
+            expect(robot).to be_instance_of(described_class)
         end
 
         it 'Initializes with an x_coord' do
-            expect(@robot.x_coord).to eq(@x_coord)
+            expect(robot.x_coord).to eq(@x_coord)
         end
 
         it 'Initializes with a y_coord' do
-            expect(@robot.y_coord).to eq(@y_coord)
+            expect(robot.y_coord).to eq(@y_coord)
+        end
+
+        it 'Initializes with an orientation' do
+            expect(robot.orientation).to eq(@orientation)
         end
     end
 end
