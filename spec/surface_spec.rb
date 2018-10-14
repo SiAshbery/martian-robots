@@ -71,5 +71,16 @@ describe Surface do
         end
     end
 
+    describe '#locate_scent' do
+        before(:each) do
+            @scent = double(:scent)
+        end
+
+        it 'locates a scent at the given location' do
+            surface.locate_scent(@scent, 0, 1)
+            expect(surface.grid[1][0][:occupant]).to eq(@scent)
+        end
+    end
+
 
 end
