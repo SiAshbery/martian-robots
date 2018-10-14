@@ -9,7 +9,7 @@ class Control
 
     def launch_robot(robot, x_coord, y_coord)
         @robots << robot
-        @surface.position(robot, x_coord, y_coord)
+        @surface.locate_robot(robot, x_coord, y_coord)
     end
 
     def instruct_robot(robot, commands)
@@ -31,7 +31,7 @@ private
 
     def update_surface(robot)
         if movement_in_bounds(robot.x_coord, robot.y_coord)
-            @surface.position(robot, robot.x_coord, robot.y_coord)
+            @surface.locate_robot(robot, robot.x_coord, robot.y_coord)
         else
             robot.mark_as_lost
         end

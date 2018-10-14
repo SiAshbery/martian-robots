@@ -3,7 +3,7 @@ require 'control'
 describe Control do
     before(:each) do
         @surface = double(:surface)
-        allow(@surface).to receive(:position)
+        allow(@surface).to receive(:locate_robot)
         allow(@surface).to receive(:x_coord).and_return(2)
         allow(@surface).to receive(:y_coord).and_return(3)
         @control = described_class.new(@surface)
@@ -34,7 +34,7 @@ describe Control do
         end
 
         it 'Calls position on surface' do
-            expect(@surface).to receive(:position).with(@robot, 0, 0)
+            expect(@surface).to receive(:locate_robot).with(@robot, 0, 0)
             @control.launch_robot(@robot, 0, 0)
         end
     end
@@ -74,14 +74,14 @@ describe Control do
         end
 
         it 'Updates robot position on surface' do
-            expect(@surface).to receive(:position).with(@robot, @robot.x_coord, @robot.y_coord)
+            expect(@surface).to receive(:locate_robot).with(@robot, @robot.x_coord, @robot.y_coord)
             @control.instruct_robot(@robot, 'F')
         end
 
         it 'Marks a robot as lost if it goes out of bounds' do
             allow(@robot).to receive(:x_coord).and_return(4)
             expect(@robot).to receive(:mark_as_lost)
-            expect(@surface).not_to receive(:position)
+            expect(@surface).not_to receive(:locate_robot)
             @control.instruct_robot(@robot, 'F')
         end
     end

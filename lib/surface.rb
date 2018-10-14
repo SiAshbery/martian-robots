@@ -11,7 +11,7 @@ class Surface
         @grid = Array.new(y_coord) { Array.new(x_coord) { { occupant: nil } } }
     end
 
-    def position(robot, x_coord, y_coord)
+    def locate_robot(robot, x_coord, y_coord)
         space_with(robot)[:occupant] = nil if space_with(robot)
         space_at(x_coord, y_coord)[:occupant] = robot if space_at(x_coord, y_coord)
     end
