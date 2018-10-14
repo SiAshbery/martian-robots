@@ -4,12 +4,12 @@ class Interface
 
     def initialize(renderer = Renderer.new)
         @renderer = renderer
-        start_menu
     end
-
-private
 
     def start_menu
         @renderer.render_start_menu
+        if gets.chomp == '1'
+            @renderer.render_main_menu
+        end
     end
 end
