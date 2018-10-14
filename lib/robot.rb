@@ -22,8 +22,10 @@ class Robot
     def move
         if orientation == 'N'
             @y_coord += 1
-        else
+        elsif orientation == 'E'
             @x_coord += 1
+        else
+            @y_coord -= 1
         end
     end
 

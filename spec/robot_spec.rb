@@ -56,17 +56,24 @@ describe Robot do
     end
 
     describe '#move' do
-        it 'When orientated N moves Y + 1' do
+        it 'When orientated N only moves Y + 1' do
             robot.move
             expect(robot.x_coord).to eq(0)
             expect(robot.y_coord).to eq(2)
         end
 
-        it 'When orientated E moves X + 1' do
+        it 'When orientated E only moves X + 1' do
             robot.turn('R')
             robot.move
             expect(robot.x_coord).to eq(1)
             expect(robot.y_coord).to eq(1)
+        end
+
+        it 'When orientated E only moves X + 1' do
+            2.times { robot.turn('R') }
+            robot.move
+            expect(robot.x_coord).to eq(0)
+            expect(robot.y_coord).to eq(0)
         end
     end
 end
