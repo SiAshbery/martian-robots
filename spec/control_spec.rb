@@ -85,18 +85,29 @@ describe Control do
             @control.instruct_robot(@robot, 'F')
         end
 
-        it 'Marks a robot as lost if it goes out of bounds' do
-            allow(@robot).to receive(:x_coord).and_return(4)
-            expect(@robot).to receive(:mark_as_lost)
-            expect(@surface).not_to receive(:locate_robot)
-            @control.instruct_robot(@robot, 'F')
+        describe 'Going out of bounds' do
+            before(:each) do
+                allow(@robot).to receive(:x_coord).and_return(4)
+            end
+
+            it 'Marks a robot as lost if it goes out of bounds' do
+                expect(@robot).to receive(:mark_as_lost)
+                expect(@surface).not_to receive(:locate_robot)
+                @control.instruct_robot(@robot, 'F')
+            end
+    
+            it 'Locates a scent on the surface if robot goes out of bounds' do
+                expect(@surface).to receive(:locate_scent)
+                @control.instruct_robot(@robot, 'F')
+            end
+    
+            it 'Adds a scent to scents if robot goes out of bounds' do
+                expect(@control.scents.length).to eq(0)
+                @control.instruct_robot(@robot, 'F')
+                expect(@control.scents.length).to eq(1)
+            end
         end
 
-        it 'Locates a scent on the surface if robot goes out of bounds' do
-            allow(@robot).to receive(:x_coord).and_return(4)
-            expect(@surface).to receive(:locate_scent)
-            @control.instruct_robot(@robot, 'F')
-        end
     end
 
 end

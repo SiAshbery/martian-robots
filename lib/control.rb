@@ -36,7 +36,9 @@ private
             @surface.locate_robot(robot, robot.x_coord, robot.y_coord)
         else
             robot.mark_as_lost
-            @surface.locate_scent(Scent.new(robot.x_coord, robot.y_coord, robot.orientation), robot)
+            scent = Scent.new(robot.x_coord, robot.y_coord, robot.orientation)
+            @surface.locate_scent(scent, robot)
+            @scents << scent
         end
     end
    
