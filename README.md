@@ -2,7 +2,51 @@
 
 Command and control a fleet of robots as they explore the strange rectangular surface of the red planet! Ray-guns not included.
 
-## The Problem:
+## Getting Started
+
+```
+clone this repo
+cd martian-robots
+bundle install
+rspec
+ruby start.rb
+```
+
+## Notes
+
+This project is current work in progress. Launching start.rb will only provide partial functionality as I opted to build the project up from the inside out.
+
+rspec tests all the interactions between classes.
+
+If you wish to manually test the integration use the following steps in your terminal:
+
+```
+irb
+require './lib/control'
+require './lib/surface'
+require './lib/robot'
+
+control = Control.new(Surface.new(<desired x coord>, <desired y coord>))
+robot = Robot.new(<desired x coord>, <desired y coord>, <desired orientation>)
+control.launch_robot(robot, robot.x_coord, robot.y_coord)
+
+control.surface.grid
+
+control.instruct_robot(robot, <Desired command string e,g. 'FRRFFLR'>)
+
+control.surface.grid
+```
+
+### Next steps:
+- Implement proper integration test for Interface. I started to build the interface on a bit of a spike and it is already starting to creep outside of the scope of this project and become unwieldy. Building a proper integration test would help keep my efforts on task.
+- Remove any and all menus. As above, these are outside of the scope of this project and even though they are simply rendered to the command line I think they fall into the realm of 'building a user interface' rather than business logic.
+- All the relevant positions of active entities are stored in their respective robots and scents. The surface doesn't seem to have any responsibility for providing coordinates for entities locating on it.
+  - This suggests to me two possibilities:
+    - I don't actually need a surface object, or can at least reduce it heavily.
+    - My distribution of responsibilities is off and I could move that responsibility into the surface.
+  - My instinct tells me it is the latter and I should keep the responsibility for supplying coordinates for objects currently on it on the surface (or possibly space object.)
+
+## The Problem
 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to
 move according to instructions provided from Earth. You are to write a program that
@@ -79,10 +123,10 @@ My first task is to go over the brief and extract any keywords that seem pertine
 
 The reasons for this is two fold:
 
-- First, by simplifying the brief down to it's most basic units of knowledge and their interactions, it allows me to form a clearer idea of what I'm actually building, hopefully helping me to avoid feature creep and a bloated piece of software.
+- First, by simplifying the brief down to it's most basic units of knowledge and their interactions, it allows me to form a clear idea of what I'm actually building, hopefully helping me to avoid feature creep and a bloated piece of software.
 - Second, once I have identified these basic units, I can begin experimenting with diagraming and spiking to improve my understanding of the task before I begin in earnest.
 
-**Note** these keywords are not etched in stone nor exhaustive and can (should) be altered, pruned and added to as my knowledge of the system improves.
+**Note** These keywords are not etched in stone nor exhaustive and can (should) be altered, pruned and added to as my knowledge of the system improves.
 
 Identified Keywords:
 
@@ -148,10 +192,10 @@ The process of plotting how the objects might interact without each other highli
 - A Surface can have many Scents.
 - Scents mark the last position and orientation of a Robot before it was lost.
 - A scent prohibits a Robot from moving in the same direction as the robot that left it behind.
-- A Surface can contain many Robots, it also seems responsible that control should know about it's active robots too.
-- Limits are imposed in terms of Maximum (coordinate) Value (50) and a Maximum instruction string length (100).
-- The Coordinates all refer to the surface so it seems sensible that the Maximum (coordinate) Value should reside there.
-- Instructions are processed by Control so the Maximum Instruction Length should be there.
+- A Surface can contain many Robots, it also seems reasonable that control should know about it's active robots too.
+- Limits are imposed in terms of a maximum coordinate value (50) and a maximum instruction string length (100).
+- The Coordinates all refer to the surface so it seems sensible that the maximum coordinate value should reside there.
+- Instructions are processed by Control so the maximum Instruction Length should be there.
 - The last piece is the Output which updates the user as to the current Robot statuses. It would be tempting to let Control handle this but this seems like an extra responsibility. Instead I believe Control should have a renderer which handles the rendering of output.
 - For the sake of simplicity I'll render things to to STDOUT for this exercise since the brief explicity states that UI isn't the focus of this exercise.
 
@@ -175,22 +219,10 @@ The development of this program will be test driven, starting with the smallest 
 
 Before I start this process however there is one outstanding issue. Based on my research and experience around modelling coordiantes and grids in a program I will likely need to use a 2D array or Matrix. This is not something I am hugely experienced with so my first port of call is to just spend a few minutes in IRB spiking a single grid to improve my understanding of how this might work in practice.
 
-## Notes
-
-All the relevant positions of active entities are stored in their respective robots and scents. The surface doesn't seem to have any responsibility for providing coordinates for entities locating on it.
-
-This suggests to me two possibilities:
-
-- I don't need to update the surface constantly, I only need to populate it when it is being rendered to the user.
-
-- My distribution of responsibilities is off and I could move that responsibility into the surface.
-
-I would like to ad more descriptive warnings and errors. E.g. When creating a surface with a length larger than the max allowed, it currently caps the length off at the max (50) without informing the user
-
-## Issues
+## Issues Encountered
 
 Testing gets.chomp pauses the tests until user manually presses enter.
 
 Switch statements causes rspec to hang unless they manually `break` Ruby reports invalid `break` statements however.
 
-- This issues have lead to me intergrationg testing the interface manually with start.rb
+These issues have lead to me intergration testing the interface manually.
